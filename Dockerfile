@@ -16,7 +16,7 @@ RUN apt-get -qq update && \
     rm -rf /var/lib/apt/lists/* && \
     apt-add-repository non-free && \
     apt-get -qq update && \
-    apt-get -qq install -y unzip p7zip-full mediainfo p7zip-rar aria2 wget curl pv jq ffmpeg locales python3-lxml xz-utils gcc neofetch && \
+    apt-get -qq install -y unzip p7zip-full mediainfo p7zip-rar aria2 wget curl pv jq ffmpeg locales python3-lxml xz-utils git gcc neofetch && \
     apt-get purge -y software-properties-common
 
 # Installing Mega sdk Python binding
