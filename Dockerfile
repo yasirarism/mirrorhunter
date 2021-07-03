@@ -11,15 +11,6 @@ RUN apt-get -qq update \
         libssl-dev libfreeimage-dev swig \
     && apt-get -y autoremove
 
-# Installing Mega sdk Python binding
-ENV MEGA_SDK_VERSION '3.9.1'
-RUN git clone https://github.com/meganz/sdk.git sdk && cd sdk \
-    && git checkout v$MEGA_SDK_VERSION \
-    && ./autogen.sh && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
-    && make -j$(nproc --all) \
-    && cd bindings/python/ && python3 setup.py bdist_wheel \
-    && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl
-
 RUN apt-get -qq update && \
     apt-get install -y software-properties-common && \
     rm -rf /var/lib/apt/lists/* && \
@@ -27,6 +18,20 @@ RUN apt-get -qq update && \
     apt-get -qq update && \
     apt-get -qq install -y unzip p7zip-full mediainfo p7zip-rar aria2 wget curl pv jq ffmpeg locales python3-lxml xz-utils neofetch && \
     apt-get purge -y software-properties-common
+
+# Installing Mega sdk Python binding
+ENV MEGA_SDK_VERSION '3.9.1'
+RUN git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/sdk \
+    && cd ~/sdk \
+    && rm -rf .git \
+    && ./autogen.sh \
+    && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
+    && make -j$(nproc --all) \
+    && cd bindings/python/ \
+    && python3 setup.py bdist_wheel \
+    && cd dist/ \
+    && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
+    && cd ~ \
 
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 ENV TZ Asia/Jakarta \
