@@ -14,7 +14,7 @@ RUN apt-get -qq update \
         libsodium-dev libnautilus-extension-dev \
         libssl-dev libfreeimage-dev swig \
         unzip p7zip-full mediainfo p7zip-rar aria2 wget curl pv jq ffmpeg locales python3-lxml xz-utils neofetch \
-    # installing megasdk python binding
+    # installing Mega sdk Python binding
     && MEGA_SDK_VERSION="3.9.1" \
     && git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
     && cd ~/home/sdk && rm -rf .git \
@@ -29,7 +29,7 @@ RUN wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requ
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm requirements.txt \
 
-# cleaning stuff
+# Cleaning stuff
     && apt-get -qq -y purge --autoremove \
        autoconf automake g++ gcc libtool m4 make software-properties-common swig \
     && apt-get -qq -y clean \
