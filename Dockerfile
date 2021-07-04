@@ -34,7 +34,7 @@ RUN git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION 
     && cd ~ \
 
 # Installing Mirror Bot requirements
-    && wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
+RUN wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm requirements.txt 
 
