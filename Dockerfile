@@ -28,9 +28,7 @@ RUN apt-get -qq update \
 RUN curl -sLo /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/extract \
     && curl -sLo /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/pextract \
     && chmod +x /usr/local/bin/extract /usr/local/bin/pextract
-
-# Installing MirrorBot requirements
-RUN wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
+    && wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm requirements.txt \
     # Cleanup environment
