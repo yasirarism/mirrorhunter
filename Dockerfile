@@ -17,10 +17,6 @@ RUN apt-get -qq update \
     # Installing dht
     && wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht.dat -O /usr/src/app/dht.dat \
     && wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht6.dat -O /usr/src/app/dht6.dat \
-    # Mirror-Bot requirements
-    && wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
-    && pip3 install --no-cache-dir -r requirements.txt \
-    && rm requirements.txt \
     # Installing Mega sdk Python binding
     && MEGA_SDK_VERSION="3.9.1" \
     && git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
@@ -31,7 +27,12 @@ RUN apt-get -qq update \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
     && cd ~ 
 
-    # Cleaning stuff
+# Mirror-Bot requirements
+RUN wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
+    && pip3 install --no-cache-dir -r requirements.txt \
+    && rm requirements.txt \
+
+# Cleaning stuff
     && apt-get -qq -y purge --autoremove \
        autoconf automake g++ gcc libtool m4 make software-properties-common swig \
     && apt-get -qq -y clean \
