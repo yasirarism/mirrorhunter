@@ -25,8 +25,8 @@ RUN apt-get -qq update \
     && cd ~
 
 # Installing MirrorBot dependencies
-RUN wget /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/extract \
-    && wget /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/pextract \
+RUN curl -sLo /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/extract \
+    && curl -sLo /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/pextract \
     && chmod +x /usr/local/bin/extract /usr/local/bin/pextract
 
 # Installing MirrorBot requirements
