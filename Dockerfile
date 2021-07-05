@@ -2,7 +2,7 @@ FROM python:3-slim-buster
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# installing dependencies
+# Installing dependencies
 RUN apt-get -qq update \
     && apt install -y software-properties-common \
     && apt-add-repository non-free \
@@ -14,7 +14,7 @@ RUN apt-get -qq update \
         libsodium-dev libnautilus-extension-dev \
         libssl-dev libfreeimage-dev swig \
         unzip p7zip-full mediainfo p7zip-rar aria2 wget curl pv jq ffmpeg locales python3-lxml xz-utils neofetch \
-    # installing Mega sdk Python binding
+    # Installing Mega sdk Python binding
     && MEGA_SDK_VERSION="3.9.1" \
     && git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
     && cd ~/home/sdk && rm -rf .git \
@@ -24,10 +24,14 @@ RUN apt-get -qq update \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
     && cd ~ 
 
-# Installing Mirror Bot requirements
+# Mirror-Bot requirements
 RUN wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm requirements.txt \
+
+# Installing dht
+RUN wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht.dat -O /usr/src/app/dht.dat \
+    && wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht6.dat -O /usr/src/app/dht6.dat
 
 # Cleaning stuff
     && apt-get -qq -y purge --autoremove \
