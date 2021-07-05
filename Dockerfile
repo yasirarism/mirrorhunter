@@ -24,7 +24,7 @@ RUN apt-get -qq update \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
     && cd ~
 
-# Setup MirrorBot dependencies
+# Installing MirrorBot requirements
 RUN wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm requirements.txt \
