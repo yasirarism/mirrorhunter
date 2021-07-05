@@ -22,9 +22,10 @@ RUN apt-get -qq update \
     && make -j$(nproc --all) \
     && cd bindings/python/ && python3 setup.py bdist_wheel \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
-    && cd ~ 
-    # Installing Mirror-Bot dependencies
-    && wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
+    && cd ~
+
+# Installing Mirror-Bot dependencies
+RUN wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm requirements.txt \
     # Cleaning stuff
