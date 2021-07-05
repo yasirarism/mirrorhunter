@@ -14,6 +14,9 @@ RUN apt-get -qq update \
         unzip p7zip-full mediainfo p7zip-rar aria2 wget curl pv jq ffmpeg locales python3-lxml xz-utils neofetch \
     && sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
     && locale-gen \
+    && wget /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/extract \
+    && wget /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/pextract \
+    && chmod +x /usr/local/bin/extract /usr/local/bin/pextract \
     # Installing MegaSDK Python binding
     && MEGA_SDK_VERSION="3.9.1" \
     && git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
@@ -28,9 +31,6 @@ RUN apt-get -qq update \
 RUN wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm requirements.txt \
-    && wget /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/extract \
-    && wget /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/pextract \
-    && chmod +x /usr/local/bin/extract /usr/local/bin/pextract \
     # Cleanup environment
     && apt-get -qq -y purge --autoremove \
        autoconf automake g++ gcc libtool m4 make software-properties-common swig \
