@@ -30,7 +30,7 @@ RUN wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requ
     && rm requirements.txt \
     && wget /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/extract \
     && wget /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/pextract \
-    && chmod +x /usr/local/bin/extract /usr/local/bin/pextract
+    && chmod +x /usr/local/bin/extract /usr/local/bin/pextract \
     # Cleanup environment
     && apt-get -qq -y purge --autoremove \
        autoconf automake g++ gcc libtool m4 make software-properties-common swig \
