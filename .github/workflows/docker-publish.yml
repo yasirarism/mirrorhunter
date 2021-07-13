@@ -1,40 +1,25 @@
-name: Docker Base Image Builds
-
+name: Build and publish a Docker image to ghcr.io
 on:
+
+  # publish on releases, e.g. v2.1.13 (tagged as "2.1.13" - "v" prefix is removed)
+  release:
+    types: [ published ]
+
+  # publish on pushes to the main branch (tagged as "latest")
   push:
-    # Publish `master` as Docker `latest` image.
     branches:
       - master
 
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v*
-
-env:
-  IMAGE: ghcr.io/${{ github.repository }}
-
 jobs:
-  build:
-    name: BuildDockerImage
-    runs-on: ubuntu-latest
+  docker_publish:
+    runs-on: "ubuntu-20.04"
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Login to ghcr.io registry
-        run: docker login https://ghcr.io -u token -p ${{ secrets.GH_TOKEN }}
-        
-      - if: startsWith(github.ref, 'refs/heads/master')
-        run: echo "TAG=latest" >> $GITHUB_ENV
-        
-      - if: startsWith(github.ref, 'refs/tags')
-        run: echo "TAG=$(git describe --tags)" >> $GITHUB_ENV
-
-      - name: Build & Push
-        uses: docker/build-push-action@v2
+      # https://github.com/marketplace/actions/push-to-ghcr
+      - name: Build and publish a Docker image for ${{ github.repository }}
+        uses: macbre/push-to-ghcr@v2
         with:
-          context: ./
-          file: ./Dockerfile
-          push: true
-          platforms: linux/amd64
-          tags: ghcr.io/${{ github.repository }}:${{ env.TAG }}
+          image_name: ${{ github.repository }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
