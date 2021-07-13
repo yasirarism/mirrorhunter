@@ -38,11 +38,3 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: ghcr.io/${{ github.repository }}:${{ env.TAG }}
-          
-      - name: Alert via Telegram
-        run: |
-          function sendTG() {
-              curl -s "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendmessage" \
-              --data "text=${*}&chat_id=${{ secrets.TELEGRAM_TO }}&parse_mode=Markdown&disable_notification=True"
-          }
-          sendTG "*Docker container has been updated:* [Link](https://github.com/breakdowns/docker/pkgs/container/dockers})" &> /dev/null
