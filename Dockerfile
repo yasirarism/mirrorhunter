@@ -7,7 +7,7 @@ RUN chmod 777 /usr/src/app
 
 # Installing dependencies
 RUN apt-get -qq -y update && apt-get -qq -y upgrade && apt-get -qq install -y software-properties-common \
-        && add-apt-repository ppa:rock-core/qt4 \
+        && add-apt-repository \
         && apt-get -qq install -y tzdata python3 python3-pip \
         unzip p7zip-full mediainfo p7zip-rar aria2 wget curl \
         pv jq ffmpeg locales python3-lxml xz-utils neofetch \
