@@ -14,7 +14,6 @@ RUN set -ex \
         libsodium-dev libnautilus-extension-dev \
         libssl-dev libfreeimage-dev swig \
     # Installing MegaSDK Python binding
-    && MEGA_SDK_VERSION="3.9.2"
     && MEGA_SDK_VERSION="3.9.2" \
     && git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
     && cd ~/home/sdk && rm -rf .git \
