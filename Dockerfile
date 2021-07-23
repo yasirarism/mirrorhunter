@@ -31,9 +31,9 @@ RUN apt-get -qq -y purge autoconf automake g++ gcc libtool m4 make software-prop
 
 # Set Locals
 RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
 
 # Installing slam-mirrorbot Requirements
 COPY requirements.txt .
