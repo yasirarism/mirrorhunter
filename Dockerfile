@@ -24,11 +24,6 @@ RUN git clone https://github.com/meganz/sdk.git sdk && cd sdk \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
     && cd ~
 
-# Installing MirrorBot dependencies
-RUN curl -sLo /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/extract \
-    && curl -sLo /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/pextract \
-    && chmod +x /usr/local/bin/extract /usr/local/bin/pextract
-
 # Cleanup environment
 RUN apt-get -qq -y purge autoconf automake g++ gcc libtool m4 make software-properties-common swig \
     && rm -rf -- /var/lib/apt/lists/* /var/cache/apt/archives/* /etc/apt/sources.list.d/* /var/tmp/* /tmp/* \
