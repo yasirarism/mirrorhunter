@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 RUN set -ex \
-    # Installing dependencies
+    # setup env
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -qq update \
     && apt-get -qq -y install software-properties-common \
@@ -10,14 +10,17 @@ RUN set -ex \
     && add-apt-repository ppa:rock-core/qt4 \
     && apt-get -qq update \
     && apt-get -qq -y install --no-install-recommends \
-    && apt-get -qq install -y tzdata python3 python3-pip \
+        # important
+        python3-pip python3 python3-dev tzdata apt-utils build-essential \
+        # build deps
+        autoconf automake g++-10 gcc-10 gcc git libtool m4 make swig \
+        # mega sdk deps
+        libc-ares-dev libqt4-dev qt4-qmake libcrypto++-dev libcurl4-openssl-dev \
+        libfreeimage-dev libsodium-dev libsqlite3-dev libssl-dev zlib1g-dev libc6 \
+        # mirror bot deps
         unzip p7zip-full mediainfo p7zip-rar aria2 wget curl \
         pv jq ffmpeg locales python3-lxml xz-utils neofetch \
-        git g++ gcc autoconf automake \
-        m4 libtool qt4-qmake make libqt4-dev libcurl4-openssl-dev \
-        libcrypto++-dev libsqlite3-dev libc-ares-dev \
-        libsodium-dev libnautilus-extension-dev \
-        libssl-dev libfreeimage-dev swig \
+    && apt-get -qq -y autoremove --purge \
     # Installing MegaSDK Python binding
     && MEGA_SDK_VERSION="3.9.2" \
     && git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
@@ -44,6 +47,3 @@ RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
-
-WORKDIR /usr/src/app
-RUN chmod 777 /usr/src/app
