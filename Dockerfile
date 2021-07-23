@@ -1,10 +1,15 @@
 FROM ubuntu:20.04
 
 RUN set -ex \
-# Installing dependencies
+    # Installing dependencies
     && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -qq -y update && apt-get -qq -y upgrade && apt-get -qq install -y software-properties-common \
+    && apt-get -qq update \
+    && apt-get -qq -y install software-properties-common \
+    && add-apt-repository universe \
+    && add-apt-repository multiverse \
     && add-apt-repository ppa:rock-core/qt4 \
+    && apt-get -qq update \
+    && apt-get -qq -y install --no-install-recommends \
     && apt-get -qq install -y tzdata python3 python3-pip \
         unzip p7zip-full mediainfo p7zip-rar aria2 wget curl \
         pv jq ffmpeg locales python3-lxml xz-utils neofetch \
