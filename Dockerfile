@@ -28,7 +28,7 @@ RUN git clone https://github.com/meganz/sdk.git sdk && cd sdk \
 
 # Installing MirrorBot dependencies
 RUN wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
-    && pip3 install --no-cache-dir -r requirements.txt \
+    && pip3 install --no-cache-dir -r requirements.txt
 
 # Cleanup Environment
 RUN apt-get -qq -y purge autoconf automake g++ gcc libtool m4 make software-properties-common swig \
