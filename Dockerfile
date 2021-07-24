@@ -1,4 +1,4 @@
-# Set Docker Base Image
+# Docker Base Image
 FROM ubuntu:20.04
 
 # Set Environment
