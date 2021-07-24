@@ -26,7 +26,7 @@ RUN git clone https://github.com/meganz/sdk.git sdk && cd sdk \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
     && cd ~
 
-# Installing MirrorBot dependencies
+# Installing MirrorBot Dependencies
 RUN curl -sLO https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
     && pip3 install --no-cache-dir -r requirements.txt
 
