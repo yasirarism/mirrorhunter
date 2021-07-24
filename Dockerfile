@@ -26,6 +26,10 @@ RUN git clone https://github.com/meganz/sdk.git sdk && cd sdk \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
     && cd ~
 
+# Installing slam-mirrorbot Requirements
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir -r requirements.txt
+
 # Cleanup Environment
 RUN apt-get -qq -y purge autoconf automake g++ gcc libtool m4 make software-properties-common swig \
     && rm -rf -- /var/lib/apt/lists/* /var/cache/apt/archives/* /etc/apt/sources.list.d/* /var/tmp/* /tmp/* \
@@ -36,7 +40,3 @@ RUN locale-gen en_US.UTF-8
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
-
-# Installing slam-mirrorbot Requirements
-COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
