@@ -1,8 +1,10 @@
+# Set Docker Base Image
 FROM ubuntu:20.04
 
+# Set Environment
 ENV DEBIAN_FRONTEND="noninteractive"
 
-# Installing dependencies
+# Installing Dependencies
 RUN apt-get -qq -y update && apt-get -qq -y upgrade && apt-get -qq install -y software-properties-common \
         && add-apt-repository ppa:rock-core/qt4 \
         && apt-get -qq install -y tzdata python3 python3-pip \
@@ -24,7 +26,7 @@ RUN git clone https://github.com/meganz/sdk.git sdk && cd sdk \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
     && cd ~
 
-# Cleanup environment
+# Cleanup Environment
 RUN apt-get -qq -y purge autoconf automake g++ gcc libtool m4 make software-properties-common swig \
     && rm -rf -- /var/lib/apt/lists/* /var/cache/apt/archives/* /etc/apt/sources.list.d/* /var/tmp/* /tmp/* \
     && apt-get -qq -y update && apt-get -qq -y upgrade && apt-get -qq -y autoremove && apt-get -qq -y autoclean
