@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND="noninteractive"
 # Installing Dependencies
 RUN apt-get -qq -y update && apt-get -qq -y upgrade && apt-get -qq install -y software-properties-common \
         && add-apt-repository ppa:rock-core/qt4 \
-        && apt-get -qq install -y tzdata python3 python3-pip python3-requests \
+        && apt-get -qq install -y tzdata python3 python3-pip \
         unzip p7zip-full p7zip-rar aria2 wget curl \
         pv jq ffmpeg locales python3-lxml xz-utils neofetch \
         git g++ gcc autoconf automake \
@@ -29,10 +29,6 @@ RUN git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION 
     && cd dist/ \
     && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
     && cd ~
-
-# Installing slam-mirrorbot Requirements
-COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Cleanup Environment
 RUN apt-get -qq -y purge autoconf automake g++ gcc libtool m4 make software-properties-common swig \
