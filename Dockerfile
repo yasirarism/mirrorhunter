@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND="noninteractive"
 # Installing Dependencies
 RUN apt-get -qq -y update && apt-get -qq -y upgrade && apt-get -qq install -y software-properties-common \
         && add-apt-repository ppa:rock-core/qt4 \
-        && apt-get -qq install -y tzdata python3 python3-pip \
+        && apt-get -qq install -y tzdata python3 python3-pip python3-requests \
         unzip p7zip-full p7zip-rar aria2 wget curl \
         pv jq ffmpeg locales python3-lxml xz-utils neofetch \
         git g++ gcc autoconf automake \
