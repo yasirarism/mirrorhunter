@@ -1,5 +1,5 @@
 # Docker
-Docker image for [slam-mirrorbot](https://github.com/breakdowns/slam-mirrorbot)
+Docker image for [slam-aria-mirror-bot](https://github.com/breakdowns/slam-aria-mirror-bot)
 
 ## Status
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/breakdowns/mega-sdk-python?style=for-the-badge&label=Docker%20Build&logo=docker)
