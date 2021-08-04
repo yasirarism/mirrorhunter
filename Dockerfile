@@ -1,6 +1,7 @@
+# Docker Base Image
 FROM python:3-slim-buster
 
-# Installing dependencies
+# Installing Dependencies
 RUN apt-get -qq update \
     && apt install -y software-properties-common \
     && apt-add-repository non-free \
@@ -22,14 +23,14 @@ RUN apt-get -qq update \
     && make -j$(nproc --all) \
     && cd bindings/python/ && python3 setup.py bdist_wheel \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
-    && cd ~
-
-# Cleanup environment
-RUN apt-get -qq -y purge --autoremove \
+    && cd ~ \
+    # Cleanup environment
+    && apt-get -qq -y purge --autoremove \
        autoconf automake g++ gcc libtool m4 make software-properties-common swig \
     && apt-get -qq -y clean \
     && rm -rf -- /var/lib/apt/lists/* /var/cache/apt/archives/* /etc/apt/sources.list.d/*
 
+# Set Environment
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
