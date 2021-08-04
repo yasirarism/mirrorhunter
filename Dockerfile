@@ -25,7 +25,7 @@ RUN apt-get -qq update \
     && cd ~
 
 # Cleanup environment
-RUB apt-get -qq -y purge --autoremove \
+RUN apt-get -qq -y purge --autoremove \
        autoconf automake g++ gcc libtool m4 make software-properties-common swig \
     && apt-get -qq -y clean \
     && rm -rf -- /var/lib/apt/lists/* /var/cache/apt/archives/* /etc/apt/sources.list.d/*
