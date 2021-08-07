@@ -5,7 +5,7 @@ FROM python:3-slim-buster
 RUN apt-get -qq update \
     && apt install -y software-properties-common curl gpg \
     && apt-add-repository non-free \
-    # for qbittorrent enchaned
+    # for qBittorrent enchaned
     && echo 'deb http://download.opensuse.org/repositories/home:/nikoneko:/test/Debian_10/ /' | tee /etc/apt/sources.list.d/home:nikoneko:test.list \
     && curl -fsSL https://download.opensuse.org/repositories/home:nikoneko:test/Debian_10/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_nikoneko_test.gpg > /dev/null \
     && apt-get -qq update \
@@ -16,6 +16,7 @@ RUN apt-get -qq update \
         libsodium-dev libnautilus-extension-dev \
         libssl-dev libfreeimage-dev swig \
         unzip p7zip-full p7zip-rar aria2 curl pv jq ffmpeg locales python3-lxml xz-utils neofetch qbittorrent-enhanced ca-certificates \
+    && apt-get -qq -t experimental upgrade -y && apt-get -qq -y autoremove --purge \
     && sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
     && locale-gen \
     # Installing MegaSDK Python binding
