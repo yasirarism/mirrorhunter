@@ -15,7 +15,7 @@ RUN apt-get -qq update \
         libcrypto++-dev libsqlite3-dev libc-ares-dev \
         libsodium-dev libnautilus-extension-dev \
         libssl-dev libfreeimage-dev swig \
-        unzip p7zip-full p7zip-rar aria2 curl pv jq ffmpeg locales python3-lxml xz-utils neofetch qbittorrent-enhanced-nox \
+        unzip p7zip-full p7zip-rar aria2 curl pv jq ffmpeg wget locales python3-lxml xz-utils neofetch qbittorrent-enhanced-nox \
     && sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
     && locale-gen \
     # Installing MegaSDK Python binding
