@@ -27,7 +27,7 @@ RUN apt-get -qq update \
     && cd bindings/python/ && python3 setup.py bdist_wheel \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
     && cd ~ \
-    # Cleanup Environment
+    # Cleanup
     && apt-get -qq -y purge --autoremove \
        autoconf gpg automake g++ gcc libtool m4 make software-properties-common swig \
     && apt-get -qq -y clean \
