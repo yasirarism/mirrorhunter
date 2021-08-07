@@ -5,7 +5,7 @@ FROM python:3-slim-buster
 RUN apt-get -qq update \
     && apt install -y software-properties-common curl gpg \
     && apt-add-repository non-free \
-    # for qBittorrent enchaned
+    # qBittorrent Enchaned
     && echo 'deb http://download.opensuse.org/repositories/home:/nikoneko:/test/Debian_10/ /' | tee /etc/apt/sources.list.d/home:nikoneko:test.list \
     && curl -fsSL https://download.opensuse.org/repositories/home:nikoneko:test/Debian_10/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_nikoneko_test.gpg > /dev/null \
     && apt-get -qq update \
@@ -18,7 +18,7 @@ RUN apt-get -qq update \
         unzip p7zip-full p7zip-rar aria2 curl pv jq ffmpeg wget locales python3-lxml xz-utils neofetch qbittorrent-enhanced-nox \
     && sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
     && locale-gen \
-    # Installing MegaSDK Python binding
+    # Installing MegaSDK Python Binding
     && MEGA_SDK_VERSION="3.9.2" \
     && git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
     && cd ~/home/sdk && rm -rf .git \
@@ -27,7 +27,7 @@ RUN apt-get -qq update \
     && cd bindings/python/ && python3 setup.py bdist_wheel \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
     && cd ~ \
-    # Cleanup environment
+    # Cleanup Environment
     && apt-get -qq -y purge --autoremove \
        autoconf gpg automake g++ gcc libtool m4 make software-properties-common swig \
     && apt-get -qq -y clean \
