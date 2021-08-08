@@ -27,7 +27,15 @@ RUN apt-get -qq update \
     && make -j$(nproc --all) \
     && cd bindings/python/ && python3 setup.py bdist_wheel \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
-    && cd ~ \
+    && cd ~
+
+# Installing MirrorBot Requirements
+RUN curl -sLo /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-tg-mirror-bot/master/extract \
+    && curl -sLo /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-tg-mirror-bot/master/pextract \
+    && chmod +x /usr/local/bin/extract /usr/local/bin/pextract \
+    && wget https://raw.githubusercontent.com/breakdowns/slam-tg-mirror-bot/master/requirements.txt \
+    && pip3 install --no-cache-dir -r requirements.txt \
+    && rm requirements.txt \
     # Cleanup
     && apt-get -qq -y purge --autoremove \
        autoconf gpg automake g++ gcc libtool m4 make software-properties-common swig \
