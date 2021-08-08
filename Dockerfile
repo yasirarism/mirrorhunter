@@ -30,10 +30,7 @@ RUN apt-get -qq update \
     && cd ~
 
 # Installing MirrorBot Requirements
-RUN curl -sLo /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-tg-mirror-bot/master/extract \
-    && curl -sLo /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-tg-mirror-bot/master/pextract \
-    && chmod +x /usr/local/bin/extract /usr/local/bin/pextract \
-    && wget https://raw.githubusercontent.com/breakdowns/slam-tg-mirror-bot/master/requirements.txt \
+RUN wget https://raw.githubusercontent.com/breakdowns/slam-tg-mirror-bot/master/requirements.txt \
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm requirements.txt \
     # Cleanup
