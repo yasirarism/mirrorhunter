@@ -34,7 +34,7 @@ RUN apt-get -qq update \
     && apt-get -qq -y clean \
     && rm -rf -- /var/lib/apt/lists/* /var/cache/apt/archives/* /etc/apt/sources.list.d/*
 
-# Set Environment
+# Environment
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
