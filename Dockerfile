@@ -1,5 +1,5 @@
 # Docker Base Image
-FROM python:3-slim-buster
+FROM python:slim-bullseye
 
 # Installing Dependencies
 RUN apt-get -qq update \
