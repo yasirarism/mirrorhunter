@@ -5,6 +5,9 @@ FROM python:3-slim-buster
 RUN apt-get -qq update \
     && apt install -y software-properties-common curl gpg \
     && apt-add-repository non-free \
+    # qBittorrent
+    && echo 'deb http://download.opensuse.org/repositories/home:/nikoneko:/test/Debian_10/ /' | tee /etc/apt/sources.list.d/home:nikoneko:test.list \
+    && curl -fsSL https://download.opensuse.org/repositories/home:nikoneko:test/Debian_10/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_nikoneko_test.gpg > /dev/null \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
         git g++ gcc autoconf automake \
