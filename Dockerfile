@@ -13,7 +13,7 @@ RUN apt-get -qq update \
         qt5-qmake qtdeclarative5-dev qtbase5-dev qttools5-dev-tools qtchooser \
         libcrypto++-dev libsqlite3-dev libc-ares-dev \
         libsodium-dev libnautilus-extension-dev \
-        libssl-dev libfreeimage-dev swig \
+        libssl-dev libfreeimage-dev libmagic swig \
         # MirrorBot Dependencies
         unzip p7zip-full p7zip-rar aria2 curl pv jq ffmpeg wget locales python3-lxml xz-utils neofetch qbittorrent-nox \
     && sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
