@@ -30,7 +30,7 @@ RUN apt-get -qq update \
     && cd ~ \
     # Cleanup
     && apt-get -qq -y purge --autoremove \
-       autoconf gpg automake g++ gcc libtool m4 make software-properties-common swig \
+       autoconf gpg automake g++ libtool m4 make software-properties-common swig \
     && apt-get -qq -y clean \
     && rm -rf -- /var/lib/apt/lists/* /var/cache/apt/archives/* /etc/apt/sources.list.d/*
 
