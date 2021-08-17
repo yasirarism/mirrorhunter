@@ -8,7 +8,9 @@ RUN apt-get -qq update \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
         git g++ gcc autoconf automake \
-        m4 libtool qt4-qmake make libqt4-dev libcurl4-openssl-dev \
+        m4 libtool make libcurl4-openssl-dev \
+        # qt5-development kit since debian bullseye drop support for qt4
+        qt5-qmake qtdeclarative5-dev qtbase5-dev qttools5-dev-tools qtchooser \
         libcrypto++-dev libsqlite3-dev libc-ares-dev \
         libsodium-dev libnautilus-extension-dev \
         libssl-dev libfreeimage-dev swig \
