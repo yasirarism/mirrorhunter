@@ -1,5 +1,5 @@
 # Docker Base Image
-FROM python:slim-bullseye
+FROM python:3-slim-buster
 
 # Installing Dependencies
 RUN apt-get -qq update \
@@ -8,12 +8,10 @@ RUN apt-get -qq update \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
         git g++ gcc autoconf automake \
-        m4 libtool make libcurl4-openssl-dev \
-        # qt5-development kit since debian bullseye drop support for qt4
-        qt5-qmake qtdeclarative5-dev qtbase5-dev qttools5-dev-tools qtchooser \
+        m4 libtool qt4-qmake make libqt4-dev libcurl4-openssl-dev \
         libcrypto++-dev libsqlite3-dev libc-ares-dev \
         libsodium-dev libnautilus-extension-dev \
-        libssl-dev libfreeimage-dev libmagic swig \
+        libssl-dev libfreeimage-dev swig \
         # MirrorBot Dependencies
         unzip p7zip-full p7zip-rar aria2 curl pv jq ffmpeg wget locales python3-lxml xz-utils neofetch qbittorrent-nox \
     && sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
