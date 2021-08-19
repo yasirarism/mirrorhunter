@@ -23,11 +23,11 @@ RUN apt-get -qq update \
     && MEGA_SDK_VERSION="3.9.2" \
     && git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
     && cd ~/home/sdk && rm -rf .git \
-    && autoupdate -fIv && ./autogen.sh \
-    && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
+    && ./autogen.sh && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
     && make -j$(nproc --all) \
     && cd bindings/python/ && python3 setup.py bdist_wheel \
     && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
+    && cd ~ \
     # Cleanup
     && apt-get -qq -y purge --autoremove \
        autoconf gpg automake g++ libtool m4 make software-properties-common swig \
