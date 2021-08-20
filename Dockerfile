@@ -1,41 +1,30 @@
-# Docker Base Image
-FROM python:3-slim-buster
+FROM ubuntu:21.10
 
-# Installing Dependencies
-RUN apt-get -qq update \
-    && apt install -y software-properties-common curl gpg \
-    && apt-add-repository non-free \
-    # qBittorrent
-    && echo 'deb http://download.opensuse.org/repositories/home:/nikoneko:/test/Debian_10/ /' | tee /etc/apt/sources.list.d/home:nikoneko:test.list \
-    && curl -fsSL https://download.opensuse.org/repositories/home:nikoneko:test/Debian_10/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_nikoneko_test.gpg > /dev/null \
-    && apt-get -qq update \
-    && apt-get -qq install -y --no-install-recommends \
-        git g++ gcc autoconf automake \
-        m4 libtool qt4-qmake make libqt4-dev libcurl4-openssl-dev \
+ENV DEBIAN_FRONTEND="noninteractive"
+
+RUN apt-get -y update && apt-get -y upgrade && \
+        apt-get install -y python3 python3-pip python3-lxml \
+        qbittorrent-nox tzdata p7zip-full p7zip-rar neofetch \
+        aria2 curl pv jq ffmpeg xz-utils locales wget unzip \
+        git g++ gcc autoconf automake m4 libtool \
+        qt5-qmake qtdeclarative5-dev qtbase5-dev qtchooser \
+        make libcurl4-openssl-dev qttools5-dev-tools \
         libcrypto++-dev libsqlite3-dev libc-ares-dev \
         libsodium-dev libnautilus-extension-dev \
-        libssl-dev libfreeimage-dev swig \
-        # MirrorBot Dependencies
-        unzip p7zip-full p7zip-rar aria2 curl pv jq ffmpeg wget locales python3-lxml xz-utils neofetch qbittorrent-nox \
-    && sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
-    && locale-gen \
-    # Installing MegaSDK Python Binding
-    && MEGA_SDK_VERSION="3.9.2" \
-    && git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
-    && cd ~/home/sdk && rm -rf .git \
-    && ./autogen.sh && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
-    && make -j$(nproc --all) \
-    && cd bindings/python/ && python3 setup.py bdist_wheel \
-    && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl \
-    && cd ~ \
-    # Cleanup
-    && apt-get -qq -y purge --autoremove \
-       autoconf gpg automake g++ libtool m4 make software-properties-common swig \
-    && apt-get -qq -y clean \
-    && rm -rf -- /var/lib/apt/lists/* /var/cache/apt/archives/* /etc/apt/sources.list.d/*
-
-# Environment
-ENV DEBIAN_FRONTEND=noninteractive \
-    LANG=en_US.UTF-8 \
-    LANGUAGE=en_US:en \
-    LC_ALL=en_US.UTF-8
+        libssl-dev libfreeimage-dev swig
+        
+# Installing mega sdk python binding
+ENV MEGA_SDK_VERSION="3.9.2"
+RUN git clone https://github.com/meganz/sdk.git sdk && cd sdk \
+        && git checkout v$MEGA_SDK_VERSION \
+        && ./autogen.sh && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
+        && make -j$(nproc --all) \
+        && cd bindings/python/ && python3 setup.py bdist_wheel \
+        && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl
+        
+RUN apt-get -y update && apt-get -y upgrade && apt-get -y autoremove && apt-get -y autoclean
+        
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
