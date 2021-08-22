@@ -14,7 +14,7 @@ RUN apt-get -y update && apt-get -y upgrade && \
         libssl-dev libfreeimage-dev swig
         
 # Installing Mega SDK Python Binding
-ENV MEGA_SDK_VERSION='3.8.2' \
+ENV MEGA_SDK_VERSION="3.9.2"
 RUN git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
     && cd ~/home/sdk && rm -rf .git \
     && autoupdate -fIv && ./autogen.sh \
