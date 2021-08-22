@@ -13,15 +13,16 @@ RUN apt-get -y update && apt-get -y upgrade && \
         libsodium-dev libnautilus-extension-dev \
         libssl-dev libfreeimage-dev swig
         
-# Installing mega sdk python binding
-ENV MEGA_SDK_VERSION="3.9.2"
-RUN git clone https://github.com/meganz/sdk.git sdk && cd sdk \
-        && git checkout v$MEGA_SDK_VERSION \
-        && ./autogen.sh && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
-        && make -j$(nproc --all) \
-        && cd bindings/python/ && python3 setup.py bdist_wheel \
-        && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl
-        
+# Installing Mega SDK Python Binding
+ENV MEGA_SDK_VERSION='3.8.2' \
+RUN git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION ~/home/sdk \
+    && cd ~/home/sdk && rm -rf .git \
+    && autoupdate -fIv && ./autogen.sh \
+    && ./configure --disable-silent-rules --enable-python --with-sodium --disable-examples \
+    && make -j$(nproc --all) \
+    && cd bindings/python/ && python3 setup.py bdist_wheel \
+    && cd dist/ && pip3 install --no-cache-dir megasdk-$MEGA_SDK_VERSION-*.whl 
+
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y autoremove && apt-get -y autoclean
         
 RUN locale-gen en_US.UTF-8
