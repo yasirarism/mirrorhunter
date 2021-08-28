@@ -1,17 +1,17 @@
-FROM ubuntu:21.10
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get -y update && apt-get -y upgrade && \
-        apt-get install -y python3 python3-pip python3-lxml \
-        qbittorrent-nox tzdata p7zip-full p7zip-rar neofetch \
-        aria2 curl pv jq ffmpeg xz-utils locales wget unzip \
-        git g++ gcc autoconf automake m4 libtool \
-        qt5-qmake qtdeclarative5-dev qtbase5-dev qtchooser \
-        make libcurl4-openssl-dev qttools5-dev-tools \
-        libcrypto++-dev libsqlite3-dev libc-ares-dev \
-        libsodium-dev libnautilus-extension-dev \
-        libssl-dev libfreeimage-dev swig
+        apt-get install -y software-properties-common && \
+        add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable && \
+        apt-get install -y python3 python3-pip python3-lxml aria2 \
+        qbittorrent-nox tzdata p7zip-full p7zip-rar curl pv jq \
+        ffmpeg locales wget unzip neofetch git make g++ gcc automake \
+        autoconf libtool libcurl4-openssl-dev qt5-default \
+        libsodium-dev libssl-dev libcrypto++-dev libc-ares-dev \
+        libsqlite3-dev libfreeimage-dev swig libboost-all-dev \
+        libpthread-stubs0-dev zlib1g-dev
         
 # Installing Mega SDK Python Binding
 ENV MEGA_SDK_VERSION="3.9.2"
