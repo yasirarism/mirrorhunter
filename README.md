@@ -10,6 +10,10 @@ Docker image for [slam-mirrorbot](https://github.com/Slam-Team/slam-mirrorbot)
 ```
 docker pull breakdowns/mega-sdk-python:latest
 ```
+OR
+```
+docker pull ghcr.io/breakdowns/docker:latest
+```
 
 ## Credits
 - [Izzy12](https://github.com/lzzy12/) for original source
