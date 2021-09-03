@@ -12,7 +12,7 @@ docker pull breakdowns/mega-sdk-python:latest
 ```
 OR
 ```
-docker pull ghcr.io/breakdowns/docker:latest
+docker pull ghcr.io/breakdowns/mega-sdk-python:latest
 ```
 
 ## Credits
