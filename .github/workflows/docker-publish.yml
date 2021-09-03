@@ -37,4 +37,4 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ghcr.io/$IMAGE:${{ env.TAG }}
+          tags: ghcr.io/$slam:${{ env.TAG }}
