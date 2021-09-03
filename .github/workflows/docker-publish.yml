@@ -1,4 +1,4 @@
-name: Docker Base Image Builds
+name: ghcr.io
 
 on:
   push:
@@ -11,11 +11,10 @@ on:
       - v*
 
 env:
-  IMAGE: ghcr.io/$slam
+  IMAGE: ghcr.io/${{ github.repository }}
 
 jobs:
   build:
-    name: BuildDockerImage
     runs-on: ubuntu-latest
 
     steps:
@@ -23,10 +22,10 @@ jobs:
 
       - name: Login to ghcr.io registry
         run: docker login https://ghcr.io -u token -p ${{ secrets.GH_TOKEN }}
-        
+
       - if: startsWith(github.ref, 'refs/heads/master')
         run: echo "TAG=latest" >> $GITHUB_ENV
-        
+
       - if: startsWith(github.ref, 'refs/tags')
         run: echo "TAG=$(git describe --tags)" >> $GITHUB_ENV
 
@@ -37,4 +36,4 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ghcr.io/$slam:${{ env.TAG }}
+          tags: ghcr.io/${{ github.repository }}:${{ env.TAG }}
