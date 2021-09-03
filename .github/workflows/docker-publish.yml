@@ -11,7 +11,7 @@ on:
       - v*
 
 env:
-  IMAGE: ghcr.io/${{ github.repository }}
+  IMAGE: ghcr.io/$slam
 
 jobs:
   build:
@@ -37,4 +37,4 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ghcr.io/${{ github.repository }}:${{ env.TAG }}
+          tags: ghcr.io/$IMAGE:${{ env.TAG }}
