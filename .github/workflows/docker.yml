@@ -25,4 +25,4 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: anime/mega-sdk-python:latest
+          tags: Anime-Republic/mega-sdk-python:latest
