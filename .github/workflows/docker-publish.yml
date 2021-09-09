@@ -30,7 +30,7 @@ jobs:
         run: echo "TAG=$(git describe --tags)" >> $GITHUB_ENV
 
       - name: Build & Push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v2.7.0
         with:
           context: ./
           file: ./Dockerfile
