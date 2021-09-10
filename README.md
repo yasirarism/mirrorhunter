@@ -1,5 +1,5 @@
 # Docker
-Docker image for [Mirror-New](https://github.com/anime-republic/MIRROR-HUNTER)
+Docker image for [MIRROR HUNTER](https://github.com/anime-republic/MIRROR-HUNTER)
 
 ## Status
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/arata74/mirrorhunter?style=for-the-badge&label=Docker%20Size&logo=docker)
