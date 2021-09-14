@@ -11,7 +11,7 @@ RUN apt-get -y update && apt-get -y upgrade && \
         autoconf libtool libcurl4-openssl-dev qt5-default \
         libsodium-dev libssl-dev libcrypto++-dev libc-ares-dev \
         libsqlite3-dev libfreeimage-dev swig libboost-all-dev \
-        libpthread-stubs0-dev zlib1g-dev libpq-dev libffi-dev
+        libpthread-stubs0-dev zlib1g-dev libpq-dev libffi-dev yt-dlp
         
 # Installing Mega SDK Python Binding
 ENV MEGA_SDK_VERSION="3.9.4"
