@@ -53,9 +53,9 @@ RUN git clone https://github.com/meganz/sdk.git --depth=1 -b v$MEGA_SDK_VERSION 
 
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y autoremove && apt-get -y autoclean
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/YasirBot
 
-RUN chmod 777 /usr/src/app
+RUN chmod 777 /usr/src/YasirBot
 
 RUN locale-gen en_US.UTF-8
 
