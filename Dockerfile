@@ -14,7 +14,7 @@ RUN apt-get -y update && apt-get -y upgrade && \
 
         ffmpeg locales unzip neofetch mediainfo git make g++ gcc automake \
 
-        autoconf libtool libcurl4-openssl-dev qt5-default \
+        autoconf libtool libcurl4-openssl-dev qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools \
 
         libsodium-dev libssl-dev libcrypto++-dev libc-ares-dev \
 
