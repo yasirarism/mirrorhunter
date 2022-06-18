@@ -26,10 +26,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and publish to Docker Hub
-        uses: docker/build-push-action@v2.7.0
-        with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64, linux/arm64
-          push: true
-          tags: yasirarism/yasirmltb:latest
+        run: |
+          docker build -t "my_app" --secret id=my_env --tag yasirarism/yasirmltb:latest
+          docker tag yasirarism/yasirmltb:latest
+          docker push yasirarism/yasirmltb:latest
