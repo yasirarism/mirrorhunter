@@ -33,5 +33,3 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: true
           tags: yasirarism/yasirmltb:latest
-          secret-files: |
-              "MY_SECRET=./rahasia"
